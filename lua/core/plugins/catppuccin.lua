@@ -1,22 +1,22 @@
 return {
     "catppuccin/nvim", 
     name = "catppuccin",
-    config = function()
-
-        require("catppuccin").setup({
-			flavour = "macchiato",
-			background= {
-				light = "latte",
-		        dark="frappe",
-			},
-			transparent_background = false,
-			styles = {
-				functions = {"italic"},
-				keywords = {"bold"},
-			}
-		})
-		vim.cmd.colorscheme "catppuccin"
-
+    priority = 1000,
+    opts  = {
+        flavour = "macchiato",
+        background= {
+            light = "latte",
+            dark="frappe",
+        },
+        transparent_background = false,
+        styles = {
+            functions = {"italic"},
+            keywords = {"bold"},
+        }
+    },
+    config = function(_, opts)
+        require("catppuccin").setup(opts)
+        vim.cmd.colorscheme "catppuccin"
     end
 }
 
