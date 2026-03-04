@@ -14,24 +14,33 @@ return {
             })
         end
     },
-    {"mason-org/mason.nvim"},
-    {"mason-org/mason-lspconfig.nvim"},
+    {"mason-org/mason.nvim", opts = {}},
+    {"mason-org/mason-lspconfig.nvim", opts = {
+        ensure_installed = {
+            "lua_ls",
+            "clangd",
+            "rust_analyzer",
+            "ts_ls",
+            "tailwindcss",
+            "cssls",
+        },
+    }},
     {
         "hrsh7th/nvim-cmp", opts = function(_, opts) 
+            local cmp = require('cmp')
             opts.snippet = {
                 expand = function(args)
                     require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
                 end,
             }
-            opts.mapping = { present = {
-                    ['<C-p>'] = opts.mapping.select_prev_item(cmp.SelectBehavior.Select),
-                    ['<C-n>'] = opts.mapping.select_next_item(cmp.SelectBehavior.Select),
-                    ['<C-y>'] = opts.mapping.confirm({ select = true }),
-                    ["<C-Space>"] = opts.mapping.complete(),
-                    ['<C-e>'] = opts.mapping.abort(),
-                }
-            }
-            table.insert(opts.sources,
+            opts.mapping = cmp.mapping.preset.insert({
+                ['<C-p>'] = cmp.mapping.select_prev_item(cmp.SelectBehavior.Select),
+                ['<C-n>'] = cmp.mapping.select_next_item(cmp.SelectBehavior.Select),
+                ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+                ["<C-Space>"] = cmp.mapping.complete(),
+                ['<C-e>'] = cmp.mapping.abort(),
+            })
+            opts.sources =
             {{
                 { name = 'nvim_lsp' },
                 { name = 'luasnip' }, -- For luasnip users.
@@ -39,7 +48,7 @@ return {
                 { name = 'buffer' },
                 { name = 'path' },
                 { name = 'cmdline' },
-            }})
+            }}
         end 
     },
     {"hrsh7th/cmp-nvim-lsp"},
