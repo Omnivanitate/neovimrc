@@ -17,7 +17,7 @@ return {
     provider = "ollama",
     providers = {
       ollama = {
-        endpoint = "http://127.0.0.1:11434",
+        endpoint = "http://host.docker.internal:11434",
         model = "llama3.2",
         timeout = 30000,
         --[[
