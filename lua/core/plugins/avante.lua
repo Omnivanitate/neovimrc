@@ -12,20 +12,27 @@ return {
   opts = {
     -- add any opts here
     -- this file can contain specific instructions for your project
-    -- instructions_file = "avante.md",
+    instructions_file = "avante.md",
     -- for example
-    provider = "ollama",
+    provider = "localollama",
     providers = {
-      ollama = {
-        endpoint = "http://host.docker.internal:11434",
-        model = "llama3.2",
+      localollama = {
+        ['local'] = true,
+        __inherited_from = "openai",
+        endpoint = "http://host.docker.internal:11434/v1",
+        model = "llama3.1",
+        disable_tools = false,
         timeout = 30000,
-        --[[
+        max_tokens = 8192,
+        num_ctx = 32768,
+        mode = "legacy",
+        api_key_name = "",
+        is_env_set = function()
+            return true
+        end,
           extra_request_body = {
-            temperature = 0.75,
-            max_tokens = 20480,
+            stream = true,
           },
-          ]]-- 
       },
     },
   },
