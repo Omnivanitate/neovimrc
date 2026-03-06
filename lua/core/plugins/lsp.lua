@@ -1,8 +1,23 @@
 return {
     {"neovim/nvim-lspconfig",
         config = function() 
+            local capabilities = vim.tbl_deep_extend(
+                "force",
+                {},
+                vim.lsp.protocol.make_client_capabilities(),
+                require("cmp_nvim_lsp").default_capabilities())
+
+            require("mason-lspconfig").setup({
+                handlers = {
+                    function(server_name) -- default handler (optional)
+
+                        require("lspconfig")[server_name].setup {
+                            capabilities = capabilities
+                        }
+                    end,
+                }
+            })
             vim.diagnostic.config({
-                -- update_in_insert = true,
                 float = {
                     focusable = false,
                     style = "minimal",
@@ -25,6 +40,19 @@ return {
             "cssls",
         },
     }},
+    {
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
+        dependencies = { "williamboman/mason.nvim" },
+        opts = {
+            ensure_installed = {
+                "selene",
+                "stylua",
+                "clang-format",
+            },
+            auto_update = false,
+            run_on_start = true,
+        },
+    },
     {
         "hrsh7th/nvim-cmp", opts = function(_, opts) 
             local cmp = require('cmp')
