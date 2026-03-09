@@ -14,26 +14,38 @@ return {
     -- this file can contain specific instructions for your project
     instructions_file = "avante.md",
     -- for example
-    provider = "localollama",
+    provider = "ollama",
     providers = {
+        ollama = { 
+            endpoint = "http://host.docker.internal:11434",
+            disable_tools = true,
+            model = "qwen2.5-coder",
+            num_ctx = 32768,
+        },
       localollama = {
-        ['local'] = true,
-        __inherited_from = "openai",
-        endpoint = "http://host.docker.internal:11434/v1",
-        model = "llama3.1",
-        disable_tools = false,
-        timeout = 30000,
-        max_tokens = 8192,
-        num_ctx = 32768,
-        mode = "legacy",
-        api_key_name = "",
-        is_env_set = function()
-            return true
-        end,
+          ['local'] = true,
+          __inherited_from = "openai",
+          endpoint = "http://host.docker.internal:11434/v1",
+          model = "qwen2.5-coder",
+          disable_tools = false,
+          max_tokens = 8192,
+          num_ctx = 32768,
+          mode = "legacy",
+          api_key_name = "",
+          is_env_set = function()
+              return true
+          end,
           extra_request_body = {
-            stream = true,
-          },
+              stream = true,
+          temperature = 0,
+          }
       },
+      ["ya"] = {
+        __inherited_from="openai",
+        endpoint = "https://ai.api.cloud.yandex.net/v1",
+        api_key_name = "YA_API_KEY",
+        model = "gpt://b1g9djk2tuobd0q1bkcq/deepseek-v32/latest"
+      } 
     },
   },
   dependencies = {
