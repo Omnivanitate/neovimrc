@@ -14,29 +14,21 @@ return {
     -- this file can contain specific instructions for your project
     instructions_file = "avante.md",
     -- for example
-    provider = "ollama",
     input = {provider = "snacks"},
+    provider = "ollama",
     providers = {
-        ollama = { 
+        ollama = {
             endpoint = "http://host.docker.internal:11434",
-            model = "qwen2.5-coder:latest",
-            disable_tools = true,
-            num_ctx = 32768,
-            extra_request_body = {
-                max_tokens = 8192,
-            }
+            model = "llama3.1:latest",
+            is_env_set = function()
+                return true
+            end
         },
         ["ya"] = {
             __inherited_from="openai",
             endpoint = "https://ai.api.cloud.yandex.net/v1",
             api_key_name = "YA_API_KEY",
             model = "gpt://b1g9djk2tuobd0q1bkcq/gpt-oss-20b/latest"
-        },
-        ["ya-heavy"] = {
-            __inherited_from="openai",
-            endpoint = "https://ai.api.cloud.yandex.net/v1",
-            api_key_name = "YA_HEAVY_API_KEY",
-            model = "gpt://b1g9djk2tuobd0q1bkcq/deepseek-v32/latest"
         },
     },
   },
