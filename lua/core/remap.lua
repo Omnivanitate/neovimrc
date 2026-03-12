@@ -11,10 +11,10 @@ vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
 vim.keymap.set("x", "<leader>p", [["_dP]])
-vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
-vim.keymap.set({"n", "v"}, "<leader>Y", [["_d]])
+vim.keymap.set({ "n", "v" }, "<leader>Y", [["_d]])
 
 vim.keymap.set("i", "<C-c>", "<Esc>")
 
@@ -26,14 +26,30 @@ vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+vim.keymap.set(
+    "n",
+    "<leader>s",
+    [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]]
+)
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
-vim.keymap.set("n", "<leader>vd", function()
-    vim.lsp.buf.definition()
-end, { noremap = true, silent = true, desc = "Goto Definition (vertical split)" })
+vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, {
+    desc = "Show diagnostic under cursor",
+})
+vim.keymap.set("n", "<leader>dy", function()
+    local diag = vim.diagnostic.get(0, { lnum = vim.fn.line(".") - 1 })[1]
+    if diag then
+        local msg = diag.message
+        local source = diag.source or "unknown"
+        local code = diag.code and (" [" .. diag.code .. "]") or ""
+
+        local full = string.format("%s%s: %s", source, code, msg)
+
+        vim.fn.setreg("+", full)
+        print("Diagnostic copied: " .. full)
+    end
+end, { desc = "Copy diagnostic with source" })
 
 vim.keymap.set("n", "<leader><leader>", function()
-    vim.cmd("so") end)
-
-
+    vim.cmd("so")
+end)

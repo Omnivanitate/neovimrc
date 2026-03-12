@@ -9,6 +9,28 @@ return {
                 require("cmp_nvim_lsp").default_capabilities()
             )
 
+            vim.lsp.config("lua_ls", {
+                settings = {
+                    Lua = {
+                        runtime = {
+                            version = "LuaJIT",
+                        },
+                        diagnostics = {
+                            globals = { "vim" },
+                        },
+                        workspace = {
+                            checkThirdParty = false,
+                            library = {
+                                vim.env.VIMRUNTIME,
+                            },
+                        },
+                        telemetry = {
+                            enable = false,
+                        },
+                    },
+                },
+            })
+
             require("mason-lspconfig").setup({
                 handlers = {
                     function(server_name) -- default handler (optional)
@@ -23,7 +45,7 @@ return {
                     focusable = false,
                     style = "minimal",
                     border = "rounded",
-                    source = "always",
+                    source = true,
                     header = "",
                     prefix = "",
                 },
