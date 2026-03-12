@@ -1,16 +1,20 @@
 return {
-    'nvim-treesitter/nvim-treesitter',
+    "nvim-treesitter/nvim-treesitter",
     lazy = false,
-    build = ':TSUpdate',
+    build = ":TSUpdate",
     opts = {
         install_dir = vim.fn.stdpath("data") .. "/site",
         ensured_installed = {
-            "rust", "c", "cpp", "lua", "bash"
+            "rust",
+            "c",
+            "cpp",
+            "lua",
+            "bash",
         },
         sync_install = false,
         auto_install = true,
         indent = {
-            enable = true
+            enable = true,
         },
         highlight = {
             enable = true,
