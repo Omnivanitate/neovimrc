@@ -8,7 +8,6 @@ return {
                 vim.lsp.protocol.make_client_capabilities(),
                 require("cmp_nvim_lsp").default_capabilities()
             )
-
             vim.lsp.config("lua_ls", {
                 settings = {
                     Lua = {
@@ -30,7 +29,6 @@ return {
                     },
                 },
             })
-
             require("mason-lspconfig").setup({
                 handlers = {
                     function(server_name) -- default handler (optional)
@@ -40,6 +38,8 @@ return {
                     end,
                 },
             })
+            vim.lsp.enable("stylua", false);
+
             vim.diagnostic.config({
                 float = {
                     focusable = false,
@@ -52,7 +52,7 @@ return {
             })
         end,
     },
-    { "mason-org/mason.nvim", opts = {} },
+    { "mason-org/mason.nvim",    opts = {} },
     {
         "mason-org/mason-lspconfig.nvim",
         opts = {
@@ -78,7 +78,7 @@ return {
                 "cmakelang",
             },
             auto_update = false,
-            run_on_start = true,
+            run_on_start = false,
         },
     },
     {
@@ -88,7 +88,7 @@ return {
             { "hrsh7th/cmp-buffer" },
             { "hrsh7th/cmp-path" },
             { "hrsh7th/cmp-cmdline" },
-            { "L3MON4D3/LuaSnip", version = "v2.*" },
+            { "L3MON4D3/LuaSnip",    version = "v2.*" },
         },
         opts = function(_, opts)
             local cmp = require("cmp")
@@ -115,7 +115,7 @@ return {
         end,
     },
     { "saadparwaiz1/cmp_luasnip" },
-    { "j-hui/fidget.nvim", opts = {} },
+    { "j-hui/fidget.nvim",       opts = {} },
     {
         "stevearc/conform.nvim",
         opts = {
