@@ -7,34 +7,35 @@ return {
         or "make",
     event = "VeryLazy",
     version = false, -- Never set this value to "*"! Never!
-    ---@module 'avante'
-    ---@type avante.Config
-    opts = {
-        -- add any opts here
-        -- this file can contain specific instructions for your project
-        instructions_file = "avante.md",
-        -- for example
-        input = { provider = "snacks" },
-        provider = "ollama",
-        providers = {
+    opts = function()
+        local providers = {
             ollama = {
-                endpoint = "http://host.docker.internal:11434",
-                model = "llama3.1:latest",
+                endpoint = os.getenv("OLLAMA_ENDPOINT") or "http://host.docker.internal:11434",
+                model =  os.getenv("OLLAMA_MODEL") or "llama3.2:latest",
                 is_env_set = function()
                     return true
                 end,
             },
-            ["ya"] = {
-                __inherited_from = "openai",
-                endpoint = "https://ai.api.cloud.yandex.net/v1",
-                api_key_name = "YA_API_KEY",
-                model = "gpt://b1g9djk2tuobd0q1bkcq/gpt-oss-120b/latest",
+        }
+
+        local special_ok, special_avante = pcall(require, "special.avante")
+        if special_ok then
+            providers = vim.tbl_deep_extend("force", providers, special_avante.providers)
+        end
+
+        return {
+            -- add any opts here
+            -- this file can contain specific instructions for your project
+            instructions_file = "avante.md",
+            -- for example
+            input = { provider = "snacks" },
+            provider = "ollama",
+            providers = providers,
+            behaviour = {
+                enable_fastapply = false,
             },
-        },
-        behaviour = {
-            enable_fastapply = false,
-        },
-    },
+        }
+    end,
     dependencies = {
         "nvim-lua/plenary.nvim",
         "MunifTanjim/nui.nvim",
