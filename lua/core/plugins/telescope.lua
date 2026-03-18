@@ -13,7 +13,7 @@ return {
                     {},
                 },
                 {
-                    "<C-p>",
+                    "<C-P>",
                     function()
                         require("telescope.builtin").git_files()
                     end,

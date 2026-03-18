@@ -1,4 +1,6 @@
 vim.g.mapleader = " "
+
+vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "LSP Go to Definition" })
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
@@ -26,30 +28,26 @@ vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
-vim.keymap.set(
-    "n",
-    "<leader>s",
-    [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]]
-)
+vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, {
-    desc = "Show diagnostic under cursor",
+	desc = "Show diagnostic under cursor",
 })
 vim.keymap.set("n", "<leader>dy", function()
-    local diag = vim.diagnostic.get(0, { lnum = vim.fn.line(".") - 1 })[1]
-    if diag then
-        local msg = diag.message
-        local source = diag.source or "unknown"
-        local code = diag.code and (" [" .. diag.code .. "]") or ""
+	local diag = vim.diagnostic.get(0, { lnum = vim.fn.line(".") - 1 })[1]
+	if diag then
+		local msg = diag.message
+		local source = diag.source or "unknown"
+		local code = diag.code and (" [" .. diag.code .. "]") or ""
 
-        local full = string.format("%s%s: %s", source, code, msg)
+		local full = string.format("%s%s: %s", source, code, msg)
 
-        vim.fn.setreg("+", full)
-        print("Diagnostic copied: " .. full)
-    end
+		vim.fn.setreg("+", full)
+		print("Diagnostic copied: " .. full)
+	end
 end, { desc = "Copy diagnostic with source" })
 
 vim.keymap.set("n", "<leader><leader>", function()
-    vim.cmd("so")
+	vim.cmd("so")
 end)
