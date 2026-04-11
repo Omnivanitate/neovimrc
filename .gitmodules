@@ -1,6 +1,3 @@
-[submodule "lua/subneovimrc"]
-	path = lua/subneovimrc
-	url = https://github.com/Omnivanitate/subneovimrc.git
 [submodule "lua/special"]
 	path = lua/special
 	url = https://github.com/Omnivanitate/subneovimrc.git

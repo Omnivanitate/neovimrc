@@ -8,7 +8,6 @@ return {
                 "clangd",
                 "neocmake",
                 "rust_analyzer",
-                "harper_ls",
             },
             auto_update = false,
         },
