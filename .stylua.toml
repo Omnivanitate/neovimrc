@@ -1,0 +1,31 @@
+# Maximum line length before wrapping
+column_width = 80
+
+# Indentation settings
+indent_type = "Spaces"        # Options: "Spaces", "Tabs"
+indent_width = 2
+
+# Line endings
+line_endings = "Unix"         # Options: "Unix", "Windows"
+
+# Quote style for strings
+quote_style = "AutoPreferDouble"
+# Options:
+#   AutoPreferDouble
+#   AutoPreferSingle
+#   ForceDouble
+#   ForceSingle
+
+# Parentheses handling for function calls
+call_parentheses = "Always"
+# Options:
+#   Always
+#   NoSingleString
+#   NoSingleTable
+#   None
+
+# Collapse simple statements (like short if statements)
+collapse_simple_statement = "Never"
+
+# Space handling after function names
+space_after_function_names = "Never"

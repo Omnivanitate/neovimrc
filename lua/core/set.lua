@@ -1,8 +1,8 @@
 vim.lsp.enable({
-    "lua_ls",
-    "clangd",
-    "rust_analyzer",
-    "harper-ls",
+  "lua_ls",
+  "clangd",
+  "rust_analyzer",
+  "harper-ls",
 })
 
 vim.opt.nu = true
@@ -41,33 +41,33 @@ vim.opt.winborder = "rounded"
 
 -- Inline hints
 vim.diagnostic.config({
-    signs = {
-        -- text = {
-        -- 	[vim.diagnostic.severity.ERROR] = "󰅚",
-        -- 	[vim.diagnostic.severity.WARN] = "󰀪",
-        -- 	[vim.diagnostic.severity.HINT] = "󰌶",
-        -- 	[vim.diagnostic.severity.INFO] = "",
-        -- },
-        linehl = {
-            [vim.diagnostic.severity.ERROR] = "Error",
-            [vim.diagnostic.severity.WARN] = "Warn",
-            [vim.diagnostic.severity.INFO] = "Info",
-            [vim.diagnostic.severity.HINT] = "Hint",
-        },
-    },
-    virtual_text = true,
-    virtual_lines = false,
-    update_in_insert = true, -- potential perf problem?
-    jump = {
-        float = true,
-    },
-    -- virtual_lines = {
-    --     current_line = true,
+  signs = {
+    -- text = {
+    -- 	[vim.diagnostic.severity.ERROR] = "󰅚",
+    -- 	[vim.diagnostic.severity.WARN] = "󰀪",
+    -- 	[vim.diagnostic.severity.HINT] = "󰌶",
+    -- 	[vim.diagnostic.severity.INFO] = "",
     -- },
+    linehl = {
+      [vim.diagnostic.severity.ERROR] = "Error",
+      [vim.diagnostic.severity.WARN] = "Warn",
+      [vim.diagnostic.severity.INFO] = "Info",
+      [vim.diagnostic.severity.HINT] = "Hint",
+    },
+  },
+  virtual_text = true,
+  virtual_lines = false,
+  update_in_insert = true, -- potential perf problem?
+  jump = {
+    float = true,
+  },
+  -- virtual_lines = {
+  --     current_line = true,
+  -- },
 })
 
 local special_ok, _ = pcall(require, "special.core.set")
 
 if not special_ok then
-    print("Special set not found")
+  print("Special set not found")
 end
