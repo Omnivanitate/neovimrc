@@ -10,6 +10,12 @@ return {
   version = false, -- Never set this value to "*"! Never!
   opts = function()
     local providers = {
+      my_local_provider = {
+        __inherited_from = "openai",
+        endpoint = os.getenv("LOCAL_AI_PROVIDER_ENDPOINT") or "",
+        api_key_name = os.getenv("LOCAL_AI_API_KEY") or "",
+        model = os.getenv("LOCAL_AI_MODEL") or "",
+      },
       ollama = {
         endpoint = os.getenv("OLLAMA_ENDPOINT")
           or "http://host.docker.internal:11434",
@@ -34,7 +40,7 @@ return {
       instructions_file = "avante.md",
       -- for example
       input = { provider = "snacks" },
-      provider = "ollama",
+      provider = "my_local_provider",
       providers = providers,
       behaviour = {
         enable_fastapply = false,
