@@ -43,6 +43,8 @@ return {
       provider = "my_local_provider",
       providers = providers,
       behaviour = {
+        auto_apply_diff_after_generation = false,
+        auto_approve_tool_permissions = false,
         enable_fastapply = false,
       },
     }
