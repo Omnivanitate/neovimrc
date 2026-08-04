@@ -39,6 +39,7 @@ return {
       -- this file can contain specific instructions for your project
       instructions_file = "avante.md",
       -- for example
+      mode = "legacy",
       input = { provider = "snacks" },
       provider = "my_local_provider",
       providers = providers,
