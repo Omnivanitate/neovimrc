@@ -1,2 +1,2 @@
-pcall(require, "special")
 require("core")
+pcall(require, "special")
