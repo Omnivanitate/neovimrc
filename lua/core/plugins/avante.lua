@@ -39,7 +39,6 @@ return {
       -- this file can contain specific instructions for your project
       instructions_file = "avante.md",
       -- for example
-      mode = "legacy",
       input = { provider = "snacks" },
       provider = "my_local_provider",
       providers = providers,
@@ -47,6 +46,9 @@ return {
         auto_apply_diff_after_generation = false,
         auto_approve_tool_permissions = false,
         enable_fastapply = false,
+      },
+      rules = {
+        project_dir = ".avante/rules",
       },
     }
   end,
