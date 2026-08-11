@@ -48,7 +48,7 @@ return {
         enable_fastapply = false,
       },
       rules = {
-        project_dir = ".avante/rules",
+        project_dir = ".avante_rules",
       },
     }
   end,

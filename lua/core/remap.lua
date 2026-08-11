@@ -60,3 +60,5 @@ end, { desc = "Copy diagnostic with source" })
 vim.keymap.set("n", "<leader><leader>", function()
   vim.cmd("so")
 end)
+
+vim.api.nvim_create_user_command("W", "noautocmd write", {})
