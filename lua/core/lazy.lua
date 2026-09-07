@@ -34,4 +34,7 @@ end
 
 require("lazy").setup({
   spec = spec,
+  git = {
+    timeout = 1200,
+  },
 })
